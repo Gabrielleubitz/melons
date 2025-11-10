@@ -1,0 +1,19 @@
+{
+  "name": "melons-logistics-website",
+  "version": "1.0.0",
+  "description": "Melons Logistics - Professional logistics website",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx live-server . --port=3000 --open --no-css-inject",
+    "dev": "npx live-server . --port=3000 --open --no-css-inject"
+  },
+  "keywords": [
+    "logistics",
+    "website",
+    "melons"
+  ],
+  "author": "Melons Logistics",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {}
+}
