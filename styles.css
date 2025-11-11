@@ -1113,6 +1113,259 @@ img {
     flex-wrap: wrap;
 }
 
+/* CTA Section Button Overrides */
+.cta-section .btn-primary {
+    background-color: var(--white);
+    color: var(--primary-green);
+    border-color: var(--white);
+}
+
+.cta-section .btn-primary::before {
+    background-color: var(--white);
+}
+
+.cta-section .btn-primary::after {
+    color: var(--primary-green);
+}
+
+.cta-section .btn-secondary::after {
+    color: var(--primary-green);
+}
+
+/* ========================================
+   TIMELINE SECTION
+   ======================================== */
+
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 2rem 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--primary-green) 0%, var(--dark-green) 100%);
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    display: flex;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.timeline-item:nth-child(odd) {
+    flex-direction: row;
+}
+
+.timeline-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.timeline-dot {
+    width: 20px;
+    height: 20px;
+    background-color: var(--primary-green);
+    border: 4px solid var(--white);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px var(--light-gray);
+}
+
+.timeline-content {
+    width: calc(50% - 40px);
+    padding: 2rem;
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-base);
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+    margin-right: auto;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    margin-left: auto;
+}
+
+.timeline-content:hover {
+    transform: scale(1.03);
+    box-shadow: var(--shadow-lg);
+}
+
+.timeline-year {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+    color: var(--white);
+    padding: 0.5rem 1.25rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.timeline-content h3 {
+    color: var(--primary-green);
+    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+}
+
+.timeline-content p {
+    margin-bottom: 0;
+    line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 20px;
+    }
+
+    .timeline-marker {
+        left: 20px;
+    }
+
+    .timeline-item,
+    .timeline-item:nth-child(even) {
+        flex-direction: row;
+    }
+
+    .timeline-content,
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content {
+        width: calc(100% - 60px);
+        margin-left: 60px;
+    }
+}
+
+/* ========================================
+   DIFFERENTIATORS SECTION
+   ======================================== */
+
+.differentiators-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+}
+
+.diff-card {
+    background-color: var(--white);
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    transition: all var(--transition-base);
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.diff-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.diff-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-xl);
+}
+
+.diff-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+}
+
+.diff-card h3 {
+    color: var(--text-primary);
+    font-size: 1.35rem;
+    margin-bottom: 1rem;
+}
+
+.diff-card p {
+    margin-bottom: 0;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* ========================================
+   COMMITMENT SECTION
+   ======================================== */
+
+.commitment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.commitment-card {
+    background: linear-gradient(135deg, var(--off-white) 0%, var(--white) 100%);
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    border-left: 5px solid var(--primary-green);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.commitment-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: var(--primary-green);
+    opacity: 0.05;
+    border-radius: 0 16px 0 100%;
+}
+
+.commitment-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-left-color: var(--dark-green);
+}
+
+.commitment-number {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--primary-green);
+    opacity: 0.2;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.commitment-card h3 {
+    color: var(--text-primary);
+    font-size: 1.35rem;
+    margin-bottom: 0.75rem;
+}
+
+.commitment-card p {
+    margin-bottom: 0;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
 /* ========================================
    CONTACT PAGE
    ======================================== */
