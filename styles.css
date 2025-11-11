@@ -597,6 +597,157 @@ img {
 }
 
 /* ========================================
+   PROBLEM/SOLUTION SECTION
+   ======================================== */
+
+.problem-solution-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 3rem auto 0;
+}
+
+.problem-card,
+.solution-card {
+    padding: 2rem 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    transition: all var(--transition-base);
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.problem-card.visible,
+.solution-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.problem-card {
+    background-color: #fff5f5;
+    border: 2px solid #fee;
+}
+
+.problem-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+}
+
+.solution-card {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border: 2px solid var(--primary-green);
+}
+
+.solution-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 147, 69, 0.2);
+}
+
+.problem-icon,
+.solution-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1;
+}
+
+.problem-icon {
+    color: #ef4444;
+}
+
+.solution-icon {
+    color: var(--primary-green);
+    font-weight: 700;
+}
+
+.problem-card h3,
+.solution-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.problem-card p,
+.solution-card p {
+    margin-bottom: 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .problem-solution-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+/* ========================================
+   TECHNOLOGY SECTION
+   ======================================== */
+
+.tech-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.tech-feature-card {
+    background: linear-gradient(135deg, var(--white) 0%, var(--off-white) 100%);
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    transition: all var(--transition-base);
+    border-top: 4px solid var(--primary-green);
+}
+
+.tech-feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-xl);
+}
+
+.tech-feature-number {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--primary-green);
+    opacity: 0.1;
+    line-height: 1;
+}
+
+.tech-feature-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    transition: all var(--transition-base);
+}
+
+.tech-feature-card:hover .tech-feature-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.tech-feature-card h3 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.tech-feature-card p {
+    margin-bottom: 0;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* ========================================
    TWO-COLUMN LAYOUTS
    ======================================== */
 
