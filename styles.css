@@ -789,6 +789,166 @@ img {
 }
 
 /* ========================================
+   TEAM STATS
+   ======================================== */
+
+.team-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.team-stat-item {
+    padding: 1.5rem;
+}
+
+.team-stat-number {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--primary-green);
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.team-stat-label {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* ========================================
+   WHY WORK WITH US
+   ======================================== */
+
+.why-work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.why-work-card {
+    background-color: var(--off-white);
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    text-align: center;
+    transition: all var(--transition-base);
+    border: 2px solid transparent;
+}
+
+.why-work-card:hover {
+    background-color: var(--white);
+    border-color: var(--primary-green);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.why-work-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 1.5rem;
+    background-color: var(--primary-green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    transition: all var(--transition-base);
+}
+
+.why-work-card:hover .why-work-icon {
+    transform: scale(1.1);
+}
+
+.why-work-card h3 {
+    color: var(--text-primary);
+    font-size: 1.35rem;
+    margin-bottom: 1rem;
+}
+
+.why-work-card p {
+    margin-bottom: 0;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* ========================================
+   CAREERS CTA
+   ======================================== */
+
+.careers-cta-box {
+    background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+    border-radius: 20px;
+    padding: 4rem 3rem;
+    text-align: center;
+    color: var(--white);
+    box-shadow: var(--shadow-xl);
+}
+
+.careers-cta-content h2 {
+    color: var(--white);
+    margin-bottom: 1.25rem;
+    font-size: 2.5rem;
+}
+
+.careers-cta-content p {
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.careers-features {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+}
+
+.careers-feature {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    backdrop-filter: blur(10px);
+}
+
+.careers-cta-box .btn {
+    background-color: var(--white);
+    color: var(--primary-green);
+    border-color: var(--white);
+}
+
+.careers-cta-box .btn::before {
+    background-color: var(--white);
+}
+
+.careers-cta-box .btn::after {
+    color: var(--primary-green);
+}
+
+@media (max-width: 768px) {
+    .careers-cta-box {
+        padding: 3rem 2rem;
+    }
+
+    .careers-features {
+        gap: 1rem;
+    }
+
+    .careers-feature {
+        font-size: 0.85rem;
+        padding: 0.6rem 1.25rem;
+    }
+}
+
+/* ========================================
    TEAM CARDS
    ======================================== */
 
