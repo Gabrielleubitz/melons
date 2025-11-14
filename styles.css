@@ -1112,11 +1112,13 @@ img {
 .team-card-modern {
     background-color: var(--white);
     border-radius: 16px;
-    overflow: hidden;
+    overflow: visible;
     box-shadow: var(--shadow-md);
-    transition: all var(--transition-base);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0;
     transform: translateY(30px);
+    position: relative;
+    z-index: 1;
 }
 
 .team-card-modern.visible {
@@ -1125,8 +1127,9 @@ img {
 }
 
 .team-card-modern:hover {
-    transform: translateY(-10px);
+    transform: translateY(-10px) scale(1.05);
     box-shadow: var(--shadow-xl);
+    z-index: 10;
 }
 
 .team-image-container {
@@ -1135,6 +1138,7 @@ img {
     height: 400px;
     overflow: hidden;
     background-color: var(--light-gray);
+    border-radius: 16px 16px 0 0;
 }
 
 .team-img {
@@ -1154,26 +1158,50 @@ img {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 147, 69, 0.95);
+    background: rgba(0, 147, 69, 0.96);
     opacity: 0;
-    transition: opacity var(--transition-base);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    padding: 2.5rem;
+    padding: 2rem 1.5rem;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .team-card-modern:hover .team-overlay {
     opacity: 1;
 }
 
+/* Custom scrollbar for team overlay */
+.team-overlay::-webkit-scrollbar {
+    width: 6px;
+}
+
+.team-overlay::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.team-overlay::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 3px;
+}
+
+.team-overlay::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
+
 .team-bio-overlay {
     color: var(--white);
-    font-size: 1rem;
-    line-height: 1.7;
-    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    text-align: left;
     font-weight: 400;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    padding: 1rem 0.5rem;
+    margin-top: 1rem;
+    max-width: 100%;
 }
 
 .team-info {
@@ -2207,6 +2235,24 @@ img {
 
     .team-grid {
         grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .team-card-modern:hover {
+        transform: translateY(-5px) scale(1.02);
+    }
+
+    .team-image-container {
+        height: 350px;
+    }
+
+    .team-overlay {
+        padding: 1.5rem 1rem;
+    }
+
+    .team-bio-overlay {
+        font-size: 0.9rem;
+        line-height: 1.7;
     }
 
     .stats-grid {
