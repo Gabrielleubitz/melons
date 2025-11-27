@@ -214,37 +214,31 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.textContent = 'Sending...';
             submitButton.disabled = true;
 
-            // Simulate form submission (replace with actual API call)
-            setTimeout(() => {
-                // Success
-                showFormMessage('Thank you! We\'ll get back to you shortly.', 'success');
-                contactForm.reset();
-
-                // Reset button
+            // Send form data to server
+            fetch('send-contact.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showFormMessage('Thank you! We\'ll get back to you shortly.', 'success');
+                    contactForm.reset();
+                } else {
+                    showFormMessage(data.message || 'Sorry, there was an error. Please try again or call us at 800.977.7275.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Form submission error:', error);
+                showFormMessage('Sorry, there was an error. Please try again or call us at 800.977.7275.', 'error');
+            })
+            .finally(() => {
                 submitButton.textContent = originalButtonText;
                 submitButton.disabled = false;
-
-                // Here you would typically send the data to your server:
-                // fetch('/api/contact', {
-                //     method: 'POST',
-                //     headers: {
-                //         'Content-Type': 'application/json',
-                //     },
-                //     body: JSON.stringify(formData)
-                // })
-                // .then(response => response.json())
-                // .then(data => {
-                //     showFormMessage('Thank you! We\'ll get back to you shortly.', 'success');
-                //     contactForm.reset();
-                // })
-                // .catch(error => {
-                //     showFormMessage('Sorry, there was an error. Please try again.', 'error');
-                // })
-                // .finally(() => {
-                //     submitButton.textContent = originalButtonText;
-                //     submitButton.disabled = false;
-                // });
-            }, 1500);
+            });
         });
     }
 
@@ -312,11 +306,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.body.appendChild(backToTopButton);
 
-    // Show/hide back to top button
+    // Show/hide back to top button and hide when footer is visible
     window.addEventListener('scroll', function() {
+        const footer = document.querySelector('.footer-modern');
+        const scrollPosition = window.pageYOffset + window.innerHeight;
+        const footerTop = footer ? footer.offsetTop : document.body.scrollHeight;
+
+        // Show button after scrolling 500px
         if (window.pageYOffset > 500) {
-            backToTopButton.style.opacity = '1';
-            backToTopButton.style.visibility = 'visible';
+            // Hide button if footer is visible (within 100px of footer)
+            if (scrollPosition >= footerTop - 100) {
+                backToTopButton.style.opacity = '0';
+                backToTopButton.style.visibility = 'hidden';
+            } else {
+                backToTopButton.style.opacity = '1';
+                backToTopButton.style.visibility = 'visible';
+            }
         } else {
             backToTopButton.style.opacity = '0';
             backToTopButton.style.visibility = 'hidden';
