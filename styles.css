@@ -469,6 +469,7 @@ img {
 
 .hero-section {
     height: 100vh;
+    height: 100svh; /* Use small viewport height for mobile browsers */
     min-height: 650px;
     position: relative;
     display: flex;
@@ -533,6 +534,7 @@ img {
 
 .page-hero {
     height: 450px;
+    min-height: 450px;
     position: relative;
     display: flex;
     align-items: center;
@@ -2215,11 +2217,16 @@ img {
     }
 
     .hero-section {
-        min-height: 550px;
+        height: 100vh;
+        height: 100svh; /* Small viewport height for mobile */
+        min-height: calc(100vh - 82px);
+        min-height: calc(100svh - 82px);
     }
 
     .page-hero {
-        height: 350px;
+        height: 60vh;
+        height: 60svh; /* Small viewport height for mobile */
+        min-height: 400px;
     }
 
     .hero-buttons,
