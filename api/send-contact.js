@@ -102,6 +102,12 @@ export default async function handler(req, res) {
             padding: 40px 30px;
             text-align: center;
         }
+        .logo {
+            max-width: 220px;
+            height: auto;
+            margin: 0 auto 20px;
+            display: block;
+        }
         .header h1 {
             font-size: 28px;
             font-weight: 700;
@@ -240,6 +246,8 @@ export default async function handler(req, res) {
             font-weight: 600;
         }
         @media only screen and (max-width: 600px) {
+            .logo { max-width: 180px; margin-bottom: 15px; }
+            .header h1 { font-size: 24px; }
             .contact-grid { display: block; }
             .contact-row { display: block; }
             .contact-cell { display: block; padding: 10px 0; }
@@ -251,6 +259,7 @@ export default async function handler(req, res) {
 <body>
     <div class="email-wrapper">
         <div class="header">
+            <img src="https://www.melonslogistics.com/assets/Melons%20Logistics%20Calendar%20logo_White-01.png" alt="Melons Logistics" class="logo">
             <h1>🚛 New Lead Inquiry</h1>
             <p>Melons Logistics Contact Form</p>
             <div class="badge">REQUIRES RESPONSE</div>
