@@ -23,8 +23,6 @@ export default async function handler(req, res) {
         // Get environment variables
         const MAILJET_API_KEY = process.env.MAILJET_API_KEY;
         const MAILJET_SECRET_KEY = process.env.MAILJET_SECRET_KEY;
-        const RECIPIENT_EMAIL = process.env.RECIPIENT_EMAIL || 'gabrielleubitz@gmail.com';
-        const RECIPIENT_NAME = process.env.RECIPIENT_NAME || 'Asher Grossman';
 
         if (!MAILJET_API_KEY || !MAILJET_SECRET_KEY) {
             console.error('Missing Mailjet credentials');
@@ -33,6 +31,14 @@ export default async function handler(req, res) {
                 message: 'Server configuration error. Please contact support.'
             });
         }
+
+        // Recipients list
+        const recipients = [
+            { Email: 'wfink@melonslogistics.com', Name: 'William Fink' },
+            { Email: 'asher@melonslogistics.com', Name: 'Asher Grossman' },
+            { Email: 'mark@melonslogistics.com', Name: 'Mark Heise' },
+            { Email: 'dispatch@melonslogistics.com', Name: 'Melons Dispatch' }
+        ];
 
         // Parse request body
         const data = req.body;
@@ -356,12 +362,7 @@ Call: tel:${phone}
                         Email: 'dispatch@melonslogistics.com', // Verified sender in Mailjet
                         Name: 'Melons Logistics Website'
                     },
-                    To: [
-                        {
-                            Email: RECIPIENT_EMAIL,
-                            Name: RECIPIENT_NAME
-                        }
-                    ],
+                    To: recipients,
                     Subject: 'New Contact Form Submission - Melons Logistics',
                     TextPart: emailText,
                     HTMLPart: emailHtml,
@@ -392,7 +393,7 @@ Call: tel:${phone}
         console.log('Mailjet API response body:', JSON.stringify(responseData, null, 2));
 
         if (response.ok && responseData.Messages && responseData.Messages[0].Status === 'success') {
-            console.log('Email sent successfully to:', RECIPIENT_EMAIL);
+            console.log('Email sent successfully to:', recipients.map(r => r.Email).join(', '));
             return res.status(200).json({
                 success: true,
                 message: 'Thank you for contacting us! We will get back to you shortly.'
