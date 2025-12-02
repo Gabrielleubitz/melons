@@ -77,52 +77,231 @@ export default async function handler(req, res) {
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .header { background-color: #009345; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; }
-        .content { background-color: #f9f9f9; padding: 30px; border: 1px solid #ddd; border-radius: 0 0 8px 8px; }
-        .field { margin-bottom: 20px; }
-        .label { font-weight: bold; color: #009345; margin-bottom: 5px; display: block; }
-        .value { background-color: white; padding: 12px; border-left: 3px solid #009345; border-radius: 4px; }
-        .footer { text-align: center; margin-top: 20px; font-size: 12px; color: #666; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .email-wrapper {
+            max-width: 650px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 147, 69, 0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #009345 0%, #007535 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        .header p {
+            font-size: 15px;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+        .badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 12px;
+            letter-spacing: 0.5px;
+        }
+        .content {
+            padding: 40px 35px;
+            background-color: #ffffff;
+        }
+        .intro {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .intro strong {
+            color: #009345;
+            font-weight: 600;
+        }
+        .contact-grid {
+            display: table;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        .contact-row {
+            display: table-row;
+        }
+        .contact-cell {
+            display: table-cell;
+            padding: 14px 0;
+            vertical-align: top;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .contact-label {
+            font-weight: 600;
+            color: #009345;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            width: 140px;
+            padding-right: 20px;
+        }
+        .contact-value {
+            color: #2c3e50;
+            font-size: 15px;
+            font-weight: 500;
+        }
+        .contact-value a {
+            color: #009345;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .contact-value a:hover {
+            text-decoration: underline;
+        }
+        .message-section {
+            background-color: #f8fdf9;
+            border-left: 4px solid #009345;
+            padding: 20px 24px;
+            border-radius: 6px;
+            margin: 25px 0;
+        }
+        .message-label {
+            font-weight: 600;
+            color: #009345;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
+        }
+        .message-content {
+            color: #2c3e50;
+            font-size: 15px;
+            line-height: 1.7;
+            white-space: pre-wrap;
+        }
+        .action-buttons {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 2px solid #f0f0f0;
+            text-align: center;
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            margin: 0 8px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.3px;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background-color: #009345;
+            color: white;
+        }
+        .btn-secondary {
+            background-color: #ffffff;
+            color: #009345;
+            border: 2px solid #009345;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            padding: 25px 35px;
+            text-align: center;
+            font-size: 13px;
+            color: #6c757d;
+            border-top: 1px solid #e9ecef;
+        }
+        .footer-time {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 8px;
+        }
+        .footer-link {
+            color: #009345;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        @media only screen and (max-width: 600px) {
+            .contact-grid { display: block; }
+            .contact-row { display: block; }
+            .contact-cell { display: block; padding: 10px 0; }
+            .contact-label { width: 100%; padding-bottom: 4px; }
+            .btn { display: block; margin: 8px 0; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="email-wrapper">
         <div class="header">
-            <h1>New Contact Form Submission</h1>
-            <p>Melons Logistics Website</p>
+            <h1>🚛 New Lead Inquiry</h1>
+            <p>Melons Logistics Contact Form</p>
+            <div class="badge">REQUIRES RESPONSE</div>
         </div>
+
         <div class="content">
-            <div class="field">
-                <span class="label">Name:</span>
-                <div class="value">${name}</div>
+            <div class="intro">
+                A new contact form submission has been received from <strong>${name}</strong> at <strong>${company}</strong>.
             </div>
-            <div class="field">
-                <span class="label">Company:</span>
-                <div class="value">${company}</div>
+
+            <table class="contact-grid" role="presentation">
+                <tr class="contact-row">
+                    <td class="contact-cell contact-label">Contact Name</td>
+                    <td class="contact-cell contact-value">${name}</td>
+                </tr>
+                <tr class="contact-row">
+                    <td class="contact-cell contact-label">Company</td>
+                    <td class="contact-cell contact-value">${company}</td>
+                </tr>
+                <tr class="contact-row">
+                    <td class="contact-cell contact-label">Email Address</td>
+                    <td class="contact-cell contact-value">
+                        <a href="mailto:${email}">${email}</a>
+                    </td>
+                </tr>
+                <tr class="contact-row">
+                    <td class="contact-cell contact-label">Phone Number</td>
+                    <td class="contact-cell contact-value">
+                        <a href="tel:${phone}">${phone}</a>
+                    </td>
+                </tr>
+                <tr class="contact-row">
+                    <td class="contact-cell contact-label">Service Interest</td>
+                    <td class="contact-cell contact-value">${serviceName}</td>
+                </tr>
+            </table>
+
+            <div class="message-section">
+                <div class="message-label">Customer Message</div>
+                <div class="message-content">${message}</div>
             </div>
-            <div class="field">
-                <span class="label">Email:</span>
-                <div class="value"><a href="mailto:${email}">${email}</a></div>
-            </div>
-            <div class="field">
-                <span class="label">Phone:</span>
-                <div class="value"><a href="tel:${phone}">${phone}</a></div>
-            </div>
-            <div class="field">
-                <span class="label">Service Interest:</span>
-                <div class="value">${serviceName}</div>
-            </div>
-            <div class="field">
-                <span class="label">Message:</span>
-                <div class="value">${message.replace(/\n/g, '<br>')}</div>
+
+            <div class="action-buttons">
+                <a href="mailto:${email}" class="btn btn-primary">Reply to ${name}</a>
+                <a href="tel:${phone}" class="btn btn-secondary">Call ${phone}</a>
             </div>
         </div>
+
         <div class="footer">
-            <p>Received: ${new Date().toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'long' })}</p>
-            <p>This email was sent from the Melons Logistics contact form at www.melonslogistics.com</p>
+            <div class="footer-time">Received ${new Date().toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' })}</div>
+            <div>Submitted via <a href="https://www.melonslogistics.com/contact.html" class="footer-link">melonslogistics.com</a></div>
         </div>
     </div>
 </body>
@@ -130,21 +309,34 @@ export default async function handler(req, res) {
 `;
 
         const emailText = `
-NEW CONTACT FORM SUBMISSION
-Melons Logistics Website
+🚛 NEW LEAD INQUIRY
+Melons Logistics Contact Form
 
-Name: ${name}
-Company: ${company}
-Email: ${email}
-Phone: ${phone}
-Service Interest: ${serviceName}
+A new contact form submission has been received from ${name} at ${company}.
 
-Message:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CONTACT INFORMATION
+
+Contact Name:      ${name}
+Company:           ${company}
+Email Address:     ${email}
+Phone Number:      ${phone}
+Service Interest:  ${serviceName}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CUSTOMER MESSAGE
+
 ${message}
 
----
-Received: ${new Date().toLocaleString()}
-This email was sent from the Melons Logistics contact form at www.melonslogistics.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Received: ${new Date().toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' })}
+Submitted via: www.melonslogistics.com/contact.html
+
+Reply: mailto:${email}
+Call: tel:${phone}
 `;
 
         // Prepare Mailjet API request
