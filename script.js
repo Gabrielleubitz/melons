@@ -214,8 +214,8 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.textContent = 'Sending...';
             submitButton.disabled = true;
 
-            // Send form data to server
-            fetch('send-contact.php', {
+            // Send form data to server (Vercel serverless function)
+            fetch('/api/send-contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
