@@ -1,0 +1,29 @@
+# Sensitive configuration files
+config.php
+
+# System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+error_log
+debug_log
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*~

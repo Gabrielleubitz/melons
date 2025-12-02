@@ -28,12 +28,18 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
-// Mailjet API Configuration
-// SECURITY NOTE: In production, these should be stored in environment variables or a secure config file
-define('MAILJET_API_KEY', '8417b32aa0155331601e79e0fd28bf4d');
-define('MAILJET_SECRET_KEY', 'cb7c3c1c8fe440c52b31c7d319960af9');
-define('RECIPIENT_EMAIL', 'gabrielleubitz@gmail.com'); // Testing email - change to asher's email in production
-define('RECIPIENT_NAME', 'Asher Grossman'); // Change to actual recipient name
+// Load configuration file
+define('MELONS_CONFIG', true);
+if (!file_exists(__DIR__ . '/config.php')) {
+    http_response_code(500);
+    error_log('Configuration file missing: config.php not found');
+    echo json_encode([
+        'success' => false,
+        'message' => 'Server configuration error. Please contact support at 800.977.7275.'
+    ]);
+    exit();
+}
+require_once __DIR__ . '/config.php';
 
 // Get JSON input
 $input = file_get_contents('php://input');
@@ -164,8 +170,8 @@ $mailjetData = [
     'Messages' => [
         [
             'From' => [
-                'Email' => 'noreply@melonslogistics.com',
-                'Name' => 'Melons Logistics Website'
+                'Email' => FROM_EMAIL,
+                'Name' => FROM_NAME
             ],
             'To' => [
                 [
@@ -202,9 +208,11 @@ $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 $curlError = curl_error($ch);
 curl_close($ch);
 
-// Log the response for debugging (remove in production)
-error_log("Mailjet Response Code: {$httpCode}");
-error_log("Mailjet Response: {$response}");
+// Log the response for debugging (only if DEBUG_MODE is enabled)
+if (defined('DEBUG_MODE') && DEBUG_MODE) {
+    error_log("Mailjet Response Code: {$httpCode}");
+    error_log("Mailjet Response: {$response}");
+}
 
 // Check if email was sent successfully
 if ($httpCode === 200) {
