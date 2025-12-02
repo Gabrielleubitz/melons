@@ -152,7 +152,7 @@ This email was sent from the Melons Logistics contact form at www.melonslogistic
             Messages: [
                 {
                     From: {
-                        Email: 'noreply@melonslogistics.com',
+                        Email: 'dispatch@melonslogistics.com', // Verified sender in Mailjet
                         Name: 'Melons Logistics Website'
                     },
                     To: [
@@ -186,13 +186,23 @@ This email was sent from the Melons Logistics contact form at www.melonslogistic
 
         const responseData = await response.json();
 
+        // Log full response for debugging
+        console.log('Mailjet API response status:', response.status);
+        console.log('Mailjet API response body:', JSON.stringify(responseData, null, 2));
+
         if (response.ok && responseData.Messages && responseData.Messages[0].Status === 'success') {
+            console.log('Email sent successfully to:', RECIPIENT_EMAIL);
             return res.status(200).json({
                 success: true,
                 message: 'Thank you for contacting us! We will get back to you shortly.'
             });
         } else {
-            console.error('Mailjet error:', responseData);
+            // Log detailed error information
+            console.error('Mailjet API error - Status:', response.status);
+            console.error('Mailjet API error - Response:', JSON.stringify(responseData, null, 2));
+            if (responseData.Messages && responseData.Messages[0]) {
+                console.error('Message error details:', responseData.Messages[0].Errors || 'No error details');
+            }
             return res.status(500).json({
                 success: false,
                 message: 'There was an error sending your message. Please try again or call us at 800.977.7275.'
